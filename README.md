@@ -163,7 +163,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-Project Link: [https://github.com/example/fake-news-detection](https://github.com/example/fake-news-detection)
+Project Link: [https://github.com/shervlad/fake-news-detection](https://github.com/shervlad/fake-news-detection)
 
-Support: support@fakenewsdetector.example.com
+Support: vladseremet@gmail.com
 
