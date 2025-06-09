@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fake News Detector</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="../images/icon-48.png" alt="Fake News Detector Logo">
+        <h1>Fake News Detector</h1>
+      </div>
+      <div class="status-indicator" id="connectionStatus">
+        <span class="status-dot"></span>
+        <span class="status-text">Connecting...</span>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- Current Page Status Section -->
+      <section class="page-status" id="pageStatusSection">
+        <h2>Current Page Status</h2>
+        <div class="status-card" id="pageStatusCard">
+          <div class="loading-spinner"></div>
+          <p>Checking current page...</p>
+        </div>
+      </section>
+
+      <!-- Flag Content Section -->
+      <section class="flag-content">
+        <h2>Flag This Content</h2>
+        <form id="flagForm">
+          <div class="form-group">
+            <label for="flagReason">Reason for flagging:</label>
+            <select id="flagReason" required>
+              <option value="" disabled selected>Select a reason</option>
+              <option value="fake_news">Fake News</option>
+              <option value="misleading">Misleading Content</option>
+              <option value="outdated">Outdated Information</option>
+              <option value="manipulated_media">Manipulated Media</option>
+              <option value="satire_mistaken_as_news">Satire Mistaken as News</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="flagDetails">Additional details (optional):</label>
+            <textarea id="flagDetails" rows="3" placeholder="Please provide any additional context..."></textarea>
+          </div>
+          
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="includeScreenshot" checked>
+            <label for="includeScreenshot">Include screenshot</label>
+          </div>
+          
+          <button type="submit" class="primary-button" id="submitFlagBtn">
+            <span class="button-text">Submit Flag</span>
+            <span class="button-spinner hidden"></span>
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <footer>
+      <div class="settings">
+        <button id="settingsBtn" class="icon-button" title="Settings">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="website-link">
+        <a href="#" id="websiteLink" target="_blank">Visit Website</a>
+      </div>
+      <div class="user-status" id="userStatus">
+        <span>Not logged in</span>
+        <button id="loginBtn" class="text-button">Login</button>
+      </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div class="toast hidden" id="notificationToast">
+      <div class="toast-content">
+        <span class="toast-message">Message here</span>
+      </div>
+      <button class="toast-close">&times;</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+

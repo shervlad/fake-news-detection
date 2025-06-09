@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fake News Detector - Options</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="../images/icon-48.png" alt="Fake News Detector Logo">
+        <h1>Fake News Detector</h1>
+      </div>
+      <div class="subtitle">Options</div>
+    </header>
+
+    <main>
+      <section class="settings-section">
+        <h2>Alert Settings</h2>
+        <div class="setting-group">
+          <label for="alertLevel">Alert Level:</label>
+          <select id="alertLevel" class="setting-control">
+            <option value="all">All flagged content</option>
+            <option value="verified_only">Only verified fake/misleading content</option>
+            <option value="high_score_only">Only high-risk content (70%+ score)</option>
+            <option value="none">Disable alerts</option>
+          </select>
+          <p class="setting-description">Choose when to show alerts for flagged content.</p>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>Sync Settings</h2>
+        <div class="setting-group">
+          <div class="setting-checkbox">
+            <input type="checkbox" id="autoSync" class="setting-control">
+            <label for="autoSync">Enable automatic synchronization</label>
+          </div>
+          <p class="setting-description">Automatically sync with the database to get the latest flagged content.</p>
+        </div>
+
+        <div class="setting-group">
+          <label for="syncInterval">Sync Interval (minutes):</label>
+          <input type="number" id="syncInterval" class="setting-control" min="15" max="1440" step="15">
+          <p class="setting-description">How often to sync with the database (minimum 15 minutes).</p>
+        </div>
+
+        <div class="setting-group">
+          <button id="syncNowBtn" class="primary-button">Sync Now</button>
+          <p class="setting-description">
+            Last sync: <span id="lastSyncTime">Never</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>Account</h2>
+        <div id="accountSection" class="account-section">
+          <div class="loading-spinner"></div>
+          <p>Loading account information...</p>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>About</h2>
+        <div class="about-content">
+          <p>
+            Fake News Detector is a community-driven tool to help identify and flag misinformation across the web.
+          </p>
+          <p>
+            Version: 1.0.0
+          </p>
+          <div class="links">
+            <a href="#" id="websiteLink" target="_blank">Visit Website</a>
+            <a href="#" id="privacyLink" target="_blank">Privacy Policy</a>
+            <a href="#" id="termsLink" target="_blank">Terms of Service</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="actions">
+        <button id="resetBtn" class="secondary-button">Reset to Defaults</button>
+        <button id="saveBtn" class="primary-button">Save Changes</button>
+      </div>
+      <div id="saveStatus" class="save-status"></div>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
+

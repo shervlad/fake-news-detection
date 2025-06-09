@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # Backend API
+  backend:
+    build: ./website/backend
+    restart: always
+    environment:
+      - DB_USERNAME=${DB_USERNAME:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-password}
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME:-fake_news_detector}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your_secret_key_change_in_production}
+      - JWT_ACCESS_TOKEN_EXPIRES=86400
+      - JWT_REFRESH_TOKEN_EXPIRES=2592000
+      - API_URL=http://localhost:5000/api
+      - FRONTEND_URL=http://localhost:80
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_CALLBACK_URL=${GOOGLE_CALLBACK_URL:-http://localhost:5000/api/auth/google/callback}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    volumes:
+      - backend_uploads:/app/uploads
+    networks:
+      - app-network
+
+  # Website Frontend
+  frontend:
+    build: ./website/frontend
+    restart: always
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+      - VITE_GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  # Database
+  db:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USERNAME:-root}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-password}
+      - POSTGRES_DB=${DB_NAME:-fake_news_detector}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  # Database Admin (optional)
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL:-admin@example.com}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD:-admin}
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  backend_uploads:
+
